@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CupcakeErp.Web.Models.Insumo>
+
+@{
+    ViewData["Title"] = "Controle de Estoque - Insumos";
+}
+
+<div class="container mt-4">
+    <h2>📦 Controle de Estoque - Insumos</h2>
+    <hr />
+
+    <table class="table table-striped table-hover mt-3">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nome do Ingrediente</th>
+                <th>Estoque Atual</th>
+                <th>Estoque Mínimo</th>
+                <th>Unidade</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Nome</td>
+                        <td>@item.QtdStock</td>
+                        <td>@item.QtdMinima</td>
+                        <td>@item.UnidadeMedida</td>
+                        <td>
+                            @if (item.QtdStock <= item.QtdMinima)
+                            {
+                                <span class="badge bg-danger">🚨 Repor Estoque</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-success">✅ OK</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td colspan="6" class="text-center">Nenhum insumo encontrado.</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
