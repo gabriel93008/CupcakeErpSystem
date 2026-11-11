@@ -27,8 +27,8 @@
                     <tr>
                         <td>@item.Id</td>
                         <td>@item.Nome</td>
-                        <td>@item.QtdStock</td>
-                        <td>@item.QtdMinima</td>
+                        <td>@item.QtdStock.ToString("N2")</td>
+                        <td>@item.QtdMinima.ToString("N2")</td>
                         <td>@item.UnidadeMedida</td>
                         <td>
                             @if (item.QtdStock <= item.QtdMinima)
