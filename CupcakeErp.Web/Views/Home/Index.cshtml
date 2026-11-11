@@ -1,8 +1,32 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<div class="container mt-5">
+    <!-- Banner de Boas-vindas -->
+    <div class="text-center p-5 mb-5 rounded-3 shadow-sm" style="background-color: #fff; border-top: 5px solid #ffb6c1;">
+        <h1 class="display-4 fw-bold" style="color: #8b4513;">🧁 Bem-vindo ao Cupcake ERP</h1>
+        <p class="lead mt-3 text-muted">Gestão inteligente de estoque e vendas para a sua confeitaria.</p>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <!-- Cards de Acesso Rápido -->
+    <div class="row g-4 justify-content-center">
+        
+        <!-- Acesso à Frente de Caixa -->
+        <div class="col-md-5">
+            <div class="card cupcake-card h-100 p-4 text-center">
+                <div class="mb-3" style="font-size: 4rem;">🛒</div>
+                <h3 class="fw-bold" style="color: #4a3b32;">Frente de Caixa</h3>
+                <p class="text-muted">Acesse a vitrine de produtos, registre novas vendas de cupcakes e o sistema deduzirá o estoque automaticamente.</p>
+                <a asp-controller="Pedido" asp-action="Index" class="btn btn-comprar mt-auto p-2 w-75 mx-auto">Acessar Vitrine</a>
+            </div>
+        </div>
+
+        <!-- Acesso ao Estoque -->
+        <div class="col-md-5">
+            <div class="card cupcake-card h-100 p-4 text-center">
+                <div class="mb-3" style="font-size: 4rem;">📦</div>
+                <h3 class="fw-bold" style="color: #4a3b32;">Controle de Estoque</h3>
+                <p class="text-muted">Acompanhe as quantidades de farinha, cobertura e granulado. Fique de olho nos alertas para saber a hora de repor.</p>
+                <a asp-controller="Insumo" asp-action="Index" class="btn btn-outline-secondary rounded-pill mt-auto p-2 w-75 mx-auto fw-bold">Gerenciar Estoque</a>
+            </div>
+        </div>
+
+    </div>
 </div>

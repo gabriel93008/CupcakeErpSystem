@@ -14,28 +14,28 @@ namespace CupcakeErp.Web.Controllers
             _context = context;
         }
 
-        // 1. Tela inicial que lista os Cupcakes disponíveis para venda
+        
         public async Task<IActionResult> Index()
         {
             var cupcakes = await _context.Cupcakes.ToListAsync();
             return View(cupcakes);
         }
 
-        // 2. Ação de registrar a venda e dar baixa automática no estoque (Regra de Negócio)
+        
         [HttpPost]
         public async Task<IActionResult> Comprar(long idCupcake)
         {
-            // Busca o cupcake escolhido
+            
             var cupcake = await _context.Cupcakes.FindAsync(idCupcake);
             if (cupcake == null) return NotFound();
 
-            // Busca a receita (quais ingredientes esse cupcake gasta)
+            
             var receita = await _context.ReceitasInsumos
                                         .Include(r => r.Insumo)
                                         .Where(r => r.CupcakeId == idCupcake)
                                         .ToListAsync();
 
-            // PASSO A: Verifica se tem estoque suficiente ANTES de vender
+            
             foreach (var item in receita)
             {
                 if (item.Insumo != null && item.Insumo.QtdStock < item.QtdUtilizada)
@@ -45,7 +45,7 @@ namespace CupcakeErp.Web.Controllers
                 }
             }
 
-            // PASSO B: Se tem estoque, desconta a quantidade usada de cada ingrediente
+            
             foreach (var item in receita)
             {
                 if (item.Insumo != null)
@@ -55,7 +55,7 @@ namespace CupcakeErp.Web.Controllers
                 }
             }
 
-            // PASSO C: Registra o pedido de venda no financeiro
+            
             var novoPedido = new Pedido
             {
                 ValorTotal = cupcake.PrecoVenda,
@@ -64,7 +64,7 @@ namespace CupcakeErp.Web.Controllers
             };
             _context.Pedidos.Add(novoPedido);
 
-            // PASSO D: Salva todas as alterações no banco de dados de uma só vez
+            
             await _context.SaveChangesAsync();
 
             TempData["Sucesso"] = $"Venda do {cupcake.Nome} registrada! O estoque foi atualizado automaticamente.";

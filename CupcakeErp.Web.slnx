@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="CupcakeErp.Tests/CupcakeErp.Tests.csproj" Id="44f85724-e4b4-4ae4-b226-fd1c673ac478" />
   <Project Path="CupcakeErp.Web/CupcakeErp.Web.csproj" />
 </Solution>
